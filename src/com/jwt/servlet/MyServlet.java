@@ -41,7 +41,7 @@ public class MyServlet extends HttpServlet {
 			if (n > 0)
 				out.print("You are successfully registered...");
 			else
-				out.print("Something baaaaad happened...");
+				response.getWriter().append("Hello world!");
 
 		} catch (Exception e2) {
 			System.out.println(e2);

@@ -14,7 +14,7 @@ public class MyServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
 		 
-		response.setContentType("textarraylist/html");
+		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
 		ArrayList<String> classNames = new ArrayList<String>();
@@ -32,9 +32,9 @@ public class MyServlet extends HttpServlet {
 			credits.add(request.getParameter("credits" + (i+1)));
 			gpa.add(request.getParameter("gpa" + (i+1)));
 		}
+		out.print("Name: " + name + "</br>");
 		for (int i = 0; i<classNames.size(); i++) {
-			out.print("Name: " + name + "</br>"
-					+ "</br>Class: " + classNames.get(i)
+			out.print("</br>Class: " + classNames.get(i)
 					+ "</br>Credits: " + credits.get(i)
 				    + "</br>GPA: " + gpa.get(i) + "</br>");
 		}
@@ -61,7 +61,7 @@ public class MyServlet extends HttpServlet {
 				n = ps.executeUpdate();
 			}
 			//if (n > 0)
-				//out.print("You are successfully registered...");
+			//	out.print("You are successfully registered...");
 			//else
 				//out.print("Something went wrong");
 

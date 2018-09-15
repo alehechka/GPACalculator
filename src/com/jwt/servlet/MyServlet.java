@@ -1,11 +1,13 @@
 package com.jwt.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -52,7 +54,10 @@ public class MyServlet extends HttpServlet {
 			totalCredits += Integer.parseInt(credits.get(i));
 			totalGPA += Integer.parseInt(credits.get(i)) * returnGPA(gpa.get(i));
 		}
-		out.print("</br>Final GPA: " + (totalGPA/totalCredits));
+		
+		DecimalFormat df = new DecimalFormat("##.###");
+		df.setRoundingMode(RoundingMode.DOWN);
+		out.print("</br>Final GPA: " + (df.format(totalGPA/totalCredits)));
 		//out.print("Loading driver...");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

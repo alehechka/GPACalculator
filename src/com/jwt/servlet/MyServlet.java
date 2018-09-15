@@ -23,6 +23,10 @@ public class MyServlet extends HttpServlet {
 			credits[i] = request.getParameter("credits" + i);
 			gpa[i] = request.getParameter("gpa" + i);
 		}
+		out.print("Name: " + name 
+				+ "\nClass: " + className
+				+ "\nCredits: " + credits[0]
+				+ "\nGPA: " + gpa[0]);
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -41,7 +45,7 @@ public class MyServlet extends HttpServlet {
 			if (n > 0)
 				out.print("You are successfully registered...");
 			else
-				response.getWriter().append("Hello world!");
+				out.print("Something went wrong");
 
 		} catch (Exception e2) {
 			System.out.println(e2);

@@ -15,20 +15,25 @@ public class MyServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
-		String className[] = new String[5], credits[] = new String[5], gpa[] = new String[5];
+		//String className[] = new String[5], credits[] = new String[5], gpa[] = new String[5];
+		
 		
 		String name = request.getParameter("userName");
-		for (int i = 0; i<5; i++) {
-			className[i] = request.getParameter("className" + i);
-			credits[i] = request.getParameter("credits" + i);
-			gpa[i] = request.getParameter("gpa" + i);
-		}
+		String className = request.getParameter("className");
+		String credits = request.getParameter("credits");
+		String gpa = request.getParameter("gpa");
+		
+		//for (int i = 0; i<5; i++) {
+		//	className[i] = request.getParameter("className" + i);
+		//	credits[i] = request.getParameter("credits" + i);
+		//	gpa[i] = request.getParameter("gpa" + i);
+		//}
 		out.print("Name: " + name 
 				+ "\nClass: " + className
-				+ "\nCredits: " + credits[0]
-				+ "\nGPA: " + gpa[0]);
+				+ "\nCredits: " + credits
+				+ "\nGPA: " + gpa);
 
-		try {
+		/*try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://172.31.37.11:3306/gpaCalc", "gparemote", "password");
 
@@ -49,7 +54,7 @@ public class MyServlet extends HttpServlet {
 
 		} catch (Exception e2) {
 			System.out.println(e2);
-		}
+		}*/
 		out.close();
 	}
 }

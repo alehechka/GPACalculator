@@ -105,7 +105,7 @@ public class MyServlet extends HttpServlet {
 				String gpa = rs.getString("GPA");
 				
 				if (!name.equals(oldName)) {
-					out.print("Name: " + name + "</br>");
+					out.print("</br><b>Name: " + name + "</b></br>");
 					oldName = name;
 				}
 				out.print("</br>Class:   " + className);

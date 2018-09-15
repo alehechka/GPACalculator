@@ -21,20 +21,27 @@ public class MyServlet extends HttpServlet {
 		String name = request.getParameter("userName");
 		
 		for (int i = 0; i<5; i++) {
-			className[i] = request.getParameter("className" + i);
-			credits[i] = request.getParameter("credits" + i);
-			gpa[i] = request.getParameter("gpa" + i);
+			className[i] = request.getParameter("className" + (i+1));
+			credits[i] = request.getParameter("credits" + (i+1));
+			gpa[i] = request.getParameter("gpa" + (i+1));
 		}
 		for (int i = 0; i<5; i++) {
 			out.print("Name: " + name + "</br>"
 					+ "</br>Class: " + className[i]
 					+ "</br>Credits: " + credits[i]
-				    + "</br>GPA: " + gpa[i] + " </br>");
+				    + "</br>GPA: " + gpa[i] + "</br>");
 		}
-
-		/*try {
+		out.print("Lodaing driver...");
+		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://172.31.37.11:3306/gpaCalc", "gparemote", "password");
+			out.print("Driver loaded!");
+		} catch (ClassNotFoundException e) {
+			out.print("Driver error: " + e);
+		}
+		
+		out.print("Connecting database...");
+	
+		try (Connection con = DriverManager.getConnection("jdbc:mysql://172.31.37.11:3306/gpaCalc", "gparemote", "password")) {
 
 			PreparedStatement ps = con.prepareStatement("insert into studentInfo values(?,?,?,?)");
 			int n = 0;
@@ -52,8 +59,8 @@ public class MyServlet extends HttpServlet {
 				out.print("Something went wrong");
 
 		} catch (Exception e2) {
-			System.out.println(e2);
-		}*/
+			out.print("Database error: " + e2);
+		}
 		out.close();
 	}
 }

@@ -12,8 +12,8 @@
         
         
         <c:forEach var="i" begin="1" end="5">
-        	Class: <input type="text" name="className${count}"/><br/>
-        	Credits: <select name="credits${count}">
+        	Class: <input type="text" name="className${i}"/><br/>
+        	Credits: <select name="credits${i}">
         		<option>0</option>
         		<option>1</option>
         		<option>2</option>
@@ -22,7 +22,7 @@
         		<option>5</option>
         		<option>6</option>
         	</select> <br/>
-        	GPA: <select name="gpa${count}">
+        	GPA: <select name="gpa${i}">
         		<option>A+</option>
         		<option>A</option>
         		<option>A-</option>

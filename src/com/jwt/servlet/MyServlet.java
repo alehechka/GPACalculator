@@ -14,30 +14,31 @@ public class MyServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
 		 
-		response.setContentType("text/html");
+		response.setContentType("textarraylist/html");
 		PrintWriter out = response.getWriter();
 		
-		ArrayList<String> className = new ArrayList<String>();
+		ArrayList<String> classNames = new ArrayList<String>();
 		ArrayList<String> credits = new ArrayList<String>();
 		ArrayList<String> gpa = new ArrayList<String>();
 		
 		
 		String name = request.getParameter("userName");
+		String className = "";
 		
 		for (int i = 0; i<5; i++) {
-			if(request.getParameter("className" + (i+1)).equals(""))
+			if((className=request.getParameter("className" + (i+1))).equals("") || classNames.contains(className))
 				continue;
-			className.add(request.getParameter("className" + (i+1)));
+			classNames.add(className);
 			credits.add(request.getParameter("credits" + (i+1)));
 			gpa.add(request.getParameter("gpa" + (i+1)));
 		}
-		for (int i = 0; i<className.size(); i++) {
+		for (int i = 0; i<classNames.size(); i++) {
 			out.print("Name: " + name + "</br>"
-					+ "</br>Class: " + className.get(i)
+					+ "</br>Class: " + classNames.get(i)
 					+ "</br>Credits: " + credits.get(i)
 				    + "</br>GPA: " + gpa.get(i) + "</br>");
 		}
-		out.print("Lodaing driver...");
+		//out.print("Loading driver...");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			//out.print("Driver loaded!");
@@ -51,9 +52,9 @@ public class MyServlet extends HttpServlet {
 
 			PreparedStatement ps = con.prepareStatement("insert into studentInfo values(?,?,?,?)");
 			int n = 0;
-			for(int i = 0; i<className.size(); i++) {
+			for(int i = 0; i<classNames.size(); i++) {
 				ps.setString(1, name);
-				ps.setString(2, className.get(i));
+				ps.setString(2, classNames.get(i));
 				ps.setString(3, credits.get(i));
 				ps.setString(4, gpa.get(i));
 

@@ -10,33 +10,8 @@
         Name:<input type="text" name="userName"/><br/>
         <br/>
         
-        Class: <input type="text" name="className"/><br/>
-        	Credits: <select name="credits">
-        		<option>0</option>
-        		<option>1</option>
-        		<option>2</option>
-        		<option>3</option>
-        		<option>4</option> 
-        		<option>5</option>
-        		<option>6</option>
-        	</select> <br/>
-        	GPA: <select name="gpa">
-        		<option>A+</option>
-        		<option>A</option>
-        		<option>A-</option>
-        		<option>B+</option>
-        		<option>B</option>
-        		<option>B-</option>
-        		<option>C+</option>
-        		<option>C</option>
-        		<option>C-</option>
-        		<option>D</option>
-        		<option>F</option>
-        		<option>NA</option>
-        	</select> <br/>
         
-        
-        <!-- <c:forEach var="i" begin="1" end="5">
+        <c:forEach var="i" begin="1" end="5">
         	Class: <input type="text" name="className${count}"/><br/>
         	Credits: <select name="credits${count}">
         		<option>0</option>
@@ -62,7 +37,7 @@
         		<option>NA</option>
         	</select> <br/>
         	<br/>
-        </c:forEach> -->
+        </c:forEach> 
 
         <input type="submit" value="Submit"/>
  

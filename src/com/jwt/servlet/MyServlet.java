@@ -15,23 +15,22 @@ public class MyServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
-		//String className[] = new String[5], credits[] = new String[5], gpa[] = new String[5];
+		String className[] = new String[5], credits[] = new String[5], gpa[] = new String[5];
 		
 		
 		String name = request.getParameter("userName");
-		String className = request.getParameter("className");
-		String credits = request.getParameter("credits");
-		String gpa = request.getParameter("gpa");
 		
-		//for (int i = 0; i<5; i++) {
-		//	className[i] = request.getParameter("className" + i);
-		//	credits[i] = request.getParameter("credits" + i);
-		//	gpa[i] = request.getParameter("gpa" + i);
-		//}
-		out.print("Name: " + name 
-				+ "\nClass: " + className
-				+ "\nCredits: " + credits
-				+ "\nGPA: " + gpa);
+		for (int i = 0; i<5; i++) {
+			className[i] = request.getParameter("className" + i);
+			credits[i] = request.getParameter("credits" + i);
+			gpa[i] = request.getParameter("gpa" + i);
+		}
+		for (int i = 0; i<5; i++) {
+			out.print("Name: " + name + "</br>"
+					+ "</br>Class: " + className[i]
+					+ "</br>Credits: " + credits[i]
+				    + "</br>GPA: " + gpa[i] + " </br>");
+		}
 
 		/*try {
 			Class.forName("com.mysql.jdbc.Driver");

@@ -4,10 +4,15 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+
 import java.util.ArrayList;
 
 public class MyServlet extends HttpServlet {
@@ -34,9 +39,9 @@ public class MyServlet extends HttpServlet {
 		}
 		out.print("Name: " + name + "</br>");
 		for (int i = 0; i<classNames.size(); i++) {
-			out.print("</br>Class: " + classNames.get(i)
+			out.print("</br>Class:   " + classNames.get(i)
 					+ "</br>Credits: " + credits.get(i)
-				    + "</br>GPA: " + gpa.get(i) + "</br>");
+				    + "</br>GPA:     " + gpa.get(i) + "</br>");
 		}
 		//out.print("Loading driver...");
 		try {
@@ -70,4 +75,44 @@ public class MyServlet extends HttpServlet {
 		}
 		out.close();
 	}
+	
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		response.setContentType("text/html");
+		PrintWriter out = response.getWriter();
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			//out.print("Driver loaded!");
+		} catch (ClassNotFoundException e) {
+			out.print("</br>Driver error: " + e);
+		}
+		
+		try (Connection con = DriverManager.getConnection("jdbc:mysql://172.31.37.11:3306/gpaCalc", "gparemote", "password")) {
+			Statement stmt = con.createStatement();
+			String sql = "SELECT NAME, CLASS, CREDITS, GPA FROM studentInfo";
+			ResultSet rs = stmt.executeQuery(sql);
+			
+			String oldName = "";
+			while(rs.next()) {
+				String name = rs.getString("NAME");
+				String className = rs.getString("CLASS");
+				String credits = rs.getString("CREDITS");
+				String gpa = rs.getString("GPA");
+				
+				if (!name.equals(oldName)) {
+					out.print("Name: " + name + "</br>");
+					oldName = name;
+				}
+				out.print("</br>Class:   " + className);
+				out.print("</br>Credits: " + credits);
+				out.print("</br>GPA:     " + gpa + "</br>");
+			}
+			
+		} catch (Exception e2) {
+			out.print("</br>Database error: " + e2);
+		}
+		out.close();
+	}
+	
 }

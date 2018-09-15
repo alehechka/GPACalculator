@@ -39,7 +39,9 @@
         	<br/>
         </c:forEach> 
 
-        <input type="submit" value="Submit"/>
+        <input type="submit" name="submitButton" value="Submit"/>
+        
+        <input type="submit" name="studentsButton" value="View saved students"/>
  
     </form>
 </body>

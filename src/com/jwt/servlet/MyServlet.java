@@ -19,6 +19,10 @@ public class MyServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 		throws ServletException, IOException {
 		 
+		if (request.getParameter("studentsButton") != null ) {
+			doGet(request, response);
+		}
+		
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		

@@ -43,10 +43,9 @@ public class MyServlet extends HttpServlet {
 			credits.add(request.getParameter("credits" + (i+1)));
 			gpa.add(request.getParameter("gpa" + (i+1)));
 		}
-		out.print("Name: " + name + "</br>");
+		out.print("<b>Name: " + name + "</b></br>");
 		int totalCredits = 0;
 		double totalGPA = 0;
-		double finalGPA = 0;
 		for (int i = 0; i<classNames.size(); i++) {
 			out.print("</br>Class:   " + classNames.get(i)
 					+ "</br>Credits: " + credits.get(i)
@@ -111,7 +110,8 @@ public class MyServlet extends HttpServlet {
 			
 			String sqlRetrieve = "SELECT NAME, CLASS, CREDITS, GPA FROM studentInfo ORDER BY NAME";
 			ResultSet rs = stmt.executeQuery(sqlRetrieve);
-			
+			if (rs == null)
+				out.print("No saved students.");
 			String oldName = "";
 			while(rs.next()) {
 				String name = rs.getString("NAME");

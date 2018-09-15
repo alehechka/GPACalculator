@@ -94,8 +94,12 @@ public class MyServlet extends HttpServlet {
 		
 		try (Connection con = DriverManager.getConnection("jdbc:mysql://172.31.37.11:3306/gpaCalc", "gparemote", "password")) {
 			Statement stmt = con.createStatement();
-			String sql = "SELECT NAME, CLASS, CREDITS, GPA FROM studentInfo";
-			ResultSet rs = stmt.executeQuery(sql);
+			
+			String sqlSort = "SELECT NAME FROM studentInfo ORDER BY NAME";
+			stmt.executeQuery(sqlSort);
+			
+			String sqlRetrieve = "SELECT NAME, CLASS, CREDITS, GPA FROM studentInfo";
+			ResultSet rs = stmt.executeQuery(sqlRetrieve);
 			
 			String oldName = "";
 			while(rs.next()) {

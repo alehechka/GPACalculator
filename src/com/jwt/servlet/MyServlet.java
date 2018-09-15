@@ -28,7 +28,7 @@ public class MyServlet extends HttpServlet {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://172.31.37.11:3306/gpaCalc", "gparemote", "password");
 
-			PreparedStatement ps = con.prepareStatement("insert into USERDETAILS values(?,?,?,?)");
+			PreparedStatement ps = con.prepareStatement("insert into studentInfo values(?,?,?,?)");
 			int n = 0;
 			for(int i = 0; i<5; i++) {
 				ps.setString(1, name);

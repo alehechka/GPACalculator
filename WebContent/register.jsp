@@ -32,9 +32,10 @@
         		<option>C+</option>
         		<option>C</option>
         		<option>C-</option>
+        		<option>D+</option>
         		<option>D</option>
+        		<option>D-</option>
         		<option>F</option>
-        		<option>NA</option>
         	</select> <br/>
         	<br/>
         </c:forEach> 

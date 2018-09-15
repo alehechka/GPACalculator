@@ -42,11 +42,17 @@ public class MyServlet extends HttpServlet {
 			gpa.add(request.getParameter("gpa" + (i+1)));
 		}
 		out.print("Name: " + name + "</br>");
+		int totalCredits = 0;
+		double totalGPA = 0;
+		double finalGPA = 0;
 		for (int i = 0; i<classNames.size(); i++) {
 			out.print("</br>Class:   " + classNames.get(i)
 					+ "</br>Credits: " + credits.get(i)
 				    + "</br>GPA:     " + gpa.get(i) + "</br>");
+			totalCredits += Integer.parseInt(credits.get(i));
+			totalGPA += Integer.parseInt(credits.get(i)) * returnGPA(gpa.get(i));
 		}
+		out.print("</br>Final GPA: " + (totalGPA/totalCredits));
 		//out.print("Loading driver...");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -95,10 +101,10 @@ public class MyServlet extends HttpServlet {
 		try (Connection con = DriverManager.getConnection("jdbc:mysql://172.31.37.11:3306/gpaCalc", "gparemote", "password")) {
 			Statement stmt = con.createStatement();
 			
-			String sqlSort = "SELECT NAME FROM studentInfo ORDER BY NAME";
-			stmt.executeQuery(sqlSort);
+			//String sqlSort = "SELECT * FROM studentInfo ORDER BY NAME";
+			//stmt.executeQuery(sqlSort);
 			
-			String sqlRetrieve = "SELECT NAME, CLASS, CREDITS, GPA FROM studentInfo";
+			String sqlRetrieve = "SELECT NAME, CLASS, CREDITS, GPA FROM studentInfo ORDER BY NAME";
 			ResultSet rs = stmt.executeQuery(sqlRetrieve);
 			
 			String oldName = "";
@@ -121,6 +127,37 @@ public class MyServlet extends HttpServlet {
 			out.print("</br>Database error: " + e2);
 		}
 		out.close();
+	}
+	
+	private static double returnGPA(String s) {
+		switch(s) {
+		case "A+":
+		case "A":
+			return 4.0;
+		case "A-":
+			return 3.67;
+		case "B+":
+			return 3.33;
+		case "B":
+			return 3.0;
+		case "B-":
+			return 2.67;
+		case "C+":
+			return 2.33;
+		case "C":
+			return 2.0;
+		case "C-":
+			return 1.67;
+		case "D+":
+			return 1.33;
+		case "D":
+			return 1;
+		case "D-":
+			return 0.67;
+		case "F":
+			return 0;
+		}
+		return 0.0;
 	}
 	
 }

@@ -56,7 +56,7 @@ public class MyServlet extends HttpServlet {
 		
 		DecimalFormat df = new DecimalFormat("##.###");
 		df.setRoundingMode(RoundingMode.DOWN);
-		out.print("</br>Final GPA: " + (df.format(totalGPA/totalCredits)));
+		out.print("</br><b>Final GPA: " + (df.format(totalGPA/totalCredits)) + "</b>");
 		//out.print("Loading driver...");
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -110,8 +110,6 @@ public class MyServlet extends HttpServlet {
 			
 			String sqlRetrieve = "SELECT NAME, CLASS, CREDITS, GPA FROM studentInfo ORDER BY NAME";
 			ResultSet rs = stmt.executeQuery(sqlRetrieve);
-			if (rs == null)
-				out.print("No saved students.");
 			String oldName = "";
 			while(rs.next()) {
 				String name = rs.getString("NAME");
